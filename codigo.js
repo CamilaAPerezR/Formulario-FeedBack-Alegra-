@@ -1,4 +1,4 @@
-var MI_LLAVE_GEMINI = "AQ.Ab8RN6LG8KJTNNqRiXhS1bdEwIjyw0vjqE5xvcbEC6IoGP7j6A"; 
+var MI_LLAVE_GEMINI = "MI_LLAVE_GEMINI"; 
 
 // Muestra el formulario web
 function doGet() {
@@ -25,7 +25,7 @@ function guardarDatosEnSheets(nombre, producto, comentario) {
   return "Guardado exitoso";
 }
 
-var MI_LLAVE_GEMINI = "AQ.Ab8RN6LG8KJTNNqRiXhS1bdEwIjyw0vjqE5xvcbEC6IoGP7j6A"; 
+var MI_LLAVE_GEMINI = "MI_LLAVE_GEMINI"; 
 
 // Muestra el formulario web
 function doGet() {
