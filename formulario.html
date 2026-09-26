@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <style>
+      body { 
+        background-color: #f3f4f6; 
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        padding-top: 60px; 
+        display: flex;
+        justify-content: center;
+      }
+      .tarjeta-formulario {
+        background-color: #ffffff; 
+        border-radius: 12px; 
+        box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        width: 100%;
+        max-width: 440px;
+      }
+      .encabezado-alegra {
+        background-color: #00BFB2;
+        color: #ffffff;
+        padding: 24px;
+        text-align: center;
+      }
+      .encabezado-alegra h3 {
+        margin: 0;
+        font-size: 1.6em;
+        font-weight: 600;
+        letter-spacing: 1px;
+      }
+      .cuerpo-padd {
+        padding: 25px;
+      }
+      .mb-3 {
+        margin-bottom: 18px;
+      }
+      .form-label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #4b5563;
+        font-size: 0.95em;
+      }
+      .form-control, .form-select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        box-sizing: border-box;
+        font-size: 1em;
+      }
+      .form-control:focus, .form-select:focus {
+        outline: none;
+        border-color: #00BFB2;
+      }
+      .btn-alegra { 
+        width: 100%;
+        background-color: #00BFB2; 
+        color: white; 
+        font-weight: bold;
+        padding: 12px;
+        border-radius: 6px;
+        border: none;
+        font-size: 1.05em;
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+      .btn-alegra:hover { 
+        background-color: #008b82; 
+      }
+      /* Estilo del mensaje de éxito limpio */
+      .mensaje-exito {
+        display: none;
+        background-color: #d1e7dd;
+        color: #0f5132;
+        padding: 12px;
+        border-radius: 6px;
+        text-align: center;
+        margin-top: 15px;
+        font-weight: 500;
+        border: 1px solid #badbcc;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="tarjeta-formulario">
+      
+      <div class="encabezado-alegra">
+        <h3>ALEGRA FEEDBACK</h3>
+        <span style="opacity: 0.9; font-size: 0.9em;">Tu opinión nos ayuda a crecer</span>
+      </div>
+      
+      <div class="cuerpo-padd">
+        <form id="Formulario">
+          
+          <div class="mb-3">
+            <label class="form-label">Nombre de Usuario (Opcional)</label>
+            <input type="text" id="campoNombre" class="form-control" placeholder="Ej. Camila Perez">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Producto *</label>
+            <select id="campoProducto" class="form-select" required>
+              <option value="" disabled selected>Selecciona un producto</option>
+              <option value="Alegra POS">Alegra POS</option>
+              <option value="Alegra Contabilidad">Alegra Contabilidad</option>
+              <option value="Alegra Nómina">Alegra Nómina</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Comentario *</label>
+            <textarea id="campoComentario" class="form-control" rows="4" placeholder="Escribe aquí tu sugerencia o experiencia" required></textarea>
+          </div>
+
+          <button type="button" class="btn-alegra" onclick="procesarBoton()">Enviar Comentario</button>
+
+          <!-- NUEVO ELEMENTO VISUAL: El aviso aparecerá aquí de forma elegante -->
+          <div id="avisoExito" class="mensaje-exito">
+            ¡Gracias! Tu feedback ha sido registrado en la base de datos.
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+
+        <script>
+      function procesarBoton() {
+        var nombre = document.getElementById("campoNombre").value;
+        var producto = document.getElementById("campoProducto").value;
+        var comentario = document.getElementById("campoComentario").value;
+        var aviso = document.getElementById("avisoExito");
+
+        if (producto == "" || comentario == "") {
+          alert("Por favor, llena los campos obligatorios marcados con *");
+          return;
+        }
+
+        // Ocultamos el aviso por si estaba visible de un envío anterior
+        aviso.style.display = "none";
+        
+        // Conector con la hoja de calculo (Este es el que manda los datos al backend)
+        google.script.run
+          .withSuccessHandler(function() {
+            aviso.style.display = "block";
+            document.getElementById("Formulario").reset(); 
+          })
+          .guardarDatosEnSheets(nombre, producto, comentario);
+      }
+    </script>
