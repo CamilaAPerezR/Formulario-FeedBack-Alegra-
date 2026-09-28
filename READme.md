@@ -3,7 +3,6 @@
 
 Este proyecto implementa una solución empresarial para centralizar y analizar opiniones de usuarios sobre el ecosistema **Alegra** utilizando la **API de Gemini**.
 
----
 
 ## 📐 Arquitectura y Funcionalidades
 El sistema se compone de una arquitectura desacoplada de 4 capas (Frontend en HTML5/CSS3, Backend en Google Apps Script, Capa de IA con Gemini y Dashboard en Looker Studio) que permite capturar feedback, clasificar automáticamente el sentimiento (`Positivo`, `Neutro` o `Negativo`), generar resúmenes y proteger las credenciales mediante `PropertiesService`.
